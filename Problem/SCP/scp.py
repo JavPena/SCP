@@ -12,12 +12,8 @@ class SCP:
     def __init__(self) -> None:
         self.a = [[]]
         self.cost = []
-        self.example = 0
 
     def __call__(self, x) -> Any:
-        if(self.example == 0):
-            print(x)
-            self.example = 1
         xbin = self.binarize(x)
         xbin = self.repair(xbin)
         return self.objective(xbin)
@@ -45,14 +41,9 @@ class SCP:
         return result
     
     def repair(self,individual) -> list:
-        print("repair")
         while(self.constraint(individual) == False):
             n = r.randint(0,len(individual)-1)
-            if(individual[n] == 0):
-                individual[n] = 0
-            else:
-                individual[n] = 1
-        print("finish repair")
+            individual[n] = 1
         return individual
     
     def readinstance(self):
@@ -86,8 +77,6 @@ class SCP:
                 break
         return f.split(".")[0]
                 
-
-
 
 
            
