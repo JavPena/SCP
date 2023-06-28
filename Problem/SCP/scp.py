@@ -59,9 +59,9 @@ class SCP:
         mypath = pathlib.Path(__file__).parent.resolve()
         onlyfiles = [f for f in listdir(mypath)]
         for f in onlyfiles:
-            if(f != os.path.basename(__file__) ) and (f.split(".")[1] != "csv") and (not os.path.isfile(str(mypath)+"\\"+f.split(".")[0]+".csv")):
-                file = open(str(mypath)+"\\"+f)
-                data = open(str(mypath)+"\\"+f.split(".")[0]+".csv","a")
+            if(f != os.path.basename(__file__) ) and (f.split(".")[1] != "csv") and (not os.path.isfile(str(mypath)+"/"+f.split(".")[0]+".csv")):
+                file = open(str(mypath)+"/"+f)
+                data = open(str(mypath)+"/"+f.split(".")[0]+".csv","a")
                 count = 0
                 c = -1
                 number = 0
@@ -75,7 +75,6 @@ class SCP:
                             self.a = [[0 for _ in range(columns)] for _ in range(rows)]
                         elif count < columns + 2:
                             self.cost.append(word)
-                            print
                         else: 
                             if number == 0:
                                 number = word
@@ -85,7 +84,7 @@ class SCP:
                                 number = number - 1
                         count = count + 1
                 break
-        return data
+        return f.split(".")[0]
                 
 
 
