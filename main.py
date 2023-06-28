@@ -30,7 +30,7 @@ dba = DBA(sp, Move_up(sp,5),(explor,stop1), (exploi,stop2),scoring=Distance_to_t
 stop3 = Threshold(lf, "calls",10000)
 
 
-exp = Experiment(dba, stop3, save="data", backup_interval=5)
+exp = Experiment(dba, stop3, save=data, backup_interval=5)
 exp.run()
 print(f"Best solution:f(x)={lf.best_score}")
 
