@@ -8,7 +8,7 @@ import numpy as np
 from Problem.Knapsack.knap import Knsapsack
 from Problem.SCP.scp import SCP
 
-problem = Knsapsack()
+problem = SCP()
 instances = problem.instances()
 f = open("results","a")
 finalresults = []
@@ -22,7 +22,7 @@ for k in instances:
         lf = Loss()(problem)
         values = ArrayVar(converter=ArrayConverter())
 
-        for i in range(len(problem.weigh)):
+        for i in range(len(problem.cost)):
             values.append(FloatVar("float_"+str(i), -5 , 5, converter=FloatMinmax()),)
 
         sp = Hypersphere(values, lf, converter=Basic())
