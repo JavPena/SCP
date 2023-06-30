@@ -8,21 +8,21 @@ import numpy as np
 from Problem.Knapsack.knap import Knsapsack
 from Problem.SCP.scp import SCP
 
-problem = SCP()
+problem = Knsapsack()
 instances = problem.instances()
-
+f = open("results","a")
 finalresults = []
 for k in instances:
-    results = []
+    f.write(k+"\n")
     for j in range(11):
         problem.clearData()
         problem.readinstance(k)
 
 
-        lf = Loss(save=True)(problem)
+        lf = Loss()(problem)
         values = ArrayVar(converter=ArrayConverter())
 
-        for i in range(len(problem.cost)):
+        for i in range(len(problem.weigh)):
             values.append(FloatVar("float_"+str(i), -5 , 5, converter=FloatMinmax()),)
 
         sp = Hypersphere(values, lf, converter=Basic())
@@ -37,11 +37,7 @@ for k in instances:
         stop3 = Threshold(lf, "calls",40000)
 
 
-        exp = Experiment(dba, stop3, save=k+"_"+str(j), backup_interval=5)
+        exp = Experiment(dba, stop3, backup_interval=5)
         exp.run()
         print(lf.best_score)
-        results.append(lf.best_score)
-    finalresults.append([k,results])
-
-
-print(finalresults)
+        f.write(str(lf.best_score)+"\n")
